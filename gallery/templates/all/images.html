@@ -16,12 +16,21 @@ body{
     {% for love  in images %}
 
     <div class="col-md-4 col-sm-4 col-xs-4">
-      <img
+      <img 
         src="{{love.image.url}}"
         class="img-responsive img-thumbnail"
         data-toggle="modal"
         data-target="#{{image.id}}"
       />
+      <div class="jumbotron">
+      <p class="card-text photo">
+        <b>Caption of this image :</b> {{love.description}}.
+      </p>
+      <p class="card-text shot"><b>Location: </b>{{love.image_location}}</p>
+      <p class="card-text cate"><b>Category: </b>{{love.image_category}}</p>
+      <p><b>Uploaded at: </b>{{ love.date_created }}</p>
+
+    </div>
     </div>
 
     <div
@@ -51,15 +60,15 @@ body{
             <img
               class="card-img-top img-responsive"
               id="img{{image.id}}"
-              src="{{image.image.url}}"
+              src="{{love.image.url}}"
               alt="Card image cap"
             />
             <p class="card-text photo">
-              <b>Caption of this image :</b> {{image.description}}.
+              <b>Caption of this image :</b> {{love.description}}.
             </p>
-            <p class="card-text shot"><b>Location: </b>{{image.image_location}}</p>
-            <p class="card-text cate"><b>Category: </b>{{image.image_category}}</p>
-            <p><b>Uploaded at: </b>{{ image.date_created }}</p>
+            <p class="card-text shot"><b>Location: </b>{{love.image_location}}</p>
+            <p class="card-text cate"><b>Category: </b>{{love.image_category}}</p>
+            <p><b>Uploaded at: </b>{{ love.date_created }}</p>
             <div class="col-xs-10">
               <input class="form-control input-md responsive" type="text"
                 value="https://best-gallery.com/{{image.url}}" id="myInput">
