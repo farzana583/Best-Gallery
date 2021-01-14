@@ -1,5 +1,5 @@
 {% load static %}
-
+{%load bootstrap3%}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,8 +16,11 @@
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="https://images.unsplash.com/photo-1580220810949-e7ddee6a4954?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8aXNsYW1pY3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-    />
+      href="https://images.unsplash.com/photo-1580220810949-e7ddee6a4954?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8aXNsYW1pY3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+      {% block styles %}
+      {% bootstrap_css %}
+    {% endblock %}
+  
   </head>
   <body>
     {% include 'all/navbar.html' %}

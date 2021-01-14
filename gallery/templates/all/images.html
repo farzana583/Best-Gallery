@@ -1,96 +1,66 @@
-{% extends 'all/main.html' %} {% block content %}
+{% extends 'all/main.html' %}
+{% block content %}
+
 <style>
-body{
-  background-image: url("/media/meric-dagli-qeeHCFEPXp0-unsplash.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  /* background-color: blue; */
-  z-index: -1;
-}
+  body {
+    /* background-image: url("/media/meric-dagli-qeeHCFEPXp0-unsplash.jpg"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-color: blue; */
+    z-index: -1;
+  }
 </style>
 <br><br><br>
 
 <div class="container">
   <h2 style="text-align: center; font-family: monospace;">My Gallery</h2>
-  <div class="row">
-    {% for love  in images %}
-
-    <div class="col-md-4 col-sm-4 col-xs-4">
-      <img 
-        src="{{love.image.url}}"
-        class="img-responsive img-thumbnail"
-        data-toggle="modal"
-        data-target="#{{image.id}}"
-      />
-      <div class="jumbotron">
-      <p class="card-text photo">
-        <b>Caption of this image :</b> {{love.description}}.
-      </p>
-      <p class="card-text shot"><b>Location: </b>{{love.image_location}}</p>
-      <p class="card-text cate"><b>Category: </b>{{love.image_category}}</p>
-      <p><b>Uploaded at: </b>{{ love.date_created }}</p>
+  <!-- Looping through images   -->
+  {% for love in images %}
+  <!--Display all images  -->
+  <div class="view overlay">
+    <div class="col-md-4">
+      <div class="card ">
+        <button class="btn btn-styled" data-toggle="modal" data-target="#myModal{{image.id}}">
+          <img src="{{love.image.url}}" alt="{{image.name}}" class="img-responsive img-fluid img-thumbnail "
+            style="width: 450px;height:250px">
+        </button>
+      </div>
 
     </div>
-    </div>
+  </div>
 
-    <div
-      class="modal fade center"
-      id="{{ image.id }}"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-full-height modal-right" role="document">
-        <div class="modal-content">
-          <div class="modal-heading">
-            <h3 class="modal-title w-100 text-center" id="imagetitle">
-              {{love.name}}
-            </h3>
-            <button
-              type="btn btn-primary"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img
-              class="card-img-top img-responsive"
-              id="img{{image.id}}"
-              src="{{love.image.url}}"
-              alt="Card image cap"
-            />
-            <p class="card-text photo">
-              <b>Caption of this image :</b> {{love.description}}.
-            </p>
-            <p class="card-text shot"><b>Location: </b>{{love.image_location}}</p>
-            <p class="card-text cate"><b>Category: </b>{{love.image_category}}</p>
-            <p><b>Uploaded at: </b>{{ love.date_created }}</p>
-            <div class="col-xs-10">
-              <input class="form-control input-md responsive" type="text"
-                value="https://best-gallery.com/{{image.url}}" id="myInput">
-                <button type="button" class="btn btn-primary" onclick="copylink()" style="margin-right: 50%;">Copy Link</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" style="padding-left: 10%;text-align: center;">Close</button>
-            </div>
-          </div>
+  <div class="modal fade " id="myModal{{image.id}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+      <div class="modal-content modalcard">
+        <div class="modal-header">
+          <h5 class="modal-title" id="imageheader">{{love.name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <img src="{{love.image.url}}" alt="{{image.name}}" class="img-fluid" width="200px">
+        </div>
+
+        <div class="modal-footer">
+          <p class="image-location">Location ~ {{love.image_location}}</p>
+          <p class="image-location">Category ~ {{love.image_category}}</p>
+          <p class="image-location">Date on ~ {{ love.date_created }}</p>
+        </div>
+
+        <div class="modal-footer">
+          <input class="form-control input-lg" type="text" value="{{love.image.url}}" id="{{image.id}}.url">
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close
+          </button>
         </div>
       </div>
     </div>
-    {% endfor %}
   </div>
 
-  <script>
-    function copylink() {
-      var copyText = document.getElementById("myInput");
-      copyText.select();
-      copyText.setSelectionRange(0, 99999);
-      document.execCommand("copy");
-      alert("Copied the text: " + copyText.value);
-    }
-</script>
+  {% endfor %}
+</div>
 
 
 
